@@ -1,4 +1,4 @@
-import { InternalServerErrorException } from '@nestjs/common'
+import { BadRequestException, InternalServerErrorException } from '@nestjs/common'
 import { Test, TestingModule } from '@nestjs/testing'
 import { CurrenciesRepository, CurrenciesService } from './currencies.service'
 
@@ -62,6 +62,16 @@ describe('CurrenciesService', () => {
     it('should be called repository with correct params', async () => {
       await service.createCurrency(mockData)
       expect(repository.createCurrency).toBeCalledWith(mockData)
+    })
+
+    it('should be throw if value =< 0', async () => {
+      mockData.value = 0
+      await expect(service.createCurrency(mockData)).rejects.toThrow(new BadRequestException('The value must be greater zero.'))
+    })
+
+    it('should be return when repository return', async () => {
+      (repository.createCurrency as jest.Mock).mockReturnValue(mockData)
+      expect(await service.createCurrency(mockData)).toEqual(mockData)
     })
   })
 })

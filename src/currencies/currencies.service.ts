@@ -1,4 +1,4 @@
-import { Injectable, InternalServerErrorException } from '@nestjs/common'
+import { BadRequestException, Injectable } from '@nestjs/common'
 
 export class Currencies {
     currency: string
@@ -24,6 +24,9 @@ export class CurrenciesService {
     }
 
     async createCurrency({ currency, value }): Promise<Currencies> {
+        if (value <= 0) {
+            throw new BadRequestException('The value must be greater zero.')
+        }
         return await this.currenciesRepository.createCurrency({ currency, value })
     }
 }

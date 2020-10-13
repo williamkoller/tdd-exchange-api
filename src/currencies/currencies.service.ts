@@ -2,7 +2,7 @@ import { BadRequestException, Injectable } from '@nestjs/common'
 
 export class Currencies {
     currency: string
-    value: string
+    value: number
 }
 
 export class CurrenciesRepository {

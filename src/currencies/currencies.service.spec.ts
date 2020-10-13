@@ -58,5 +58,10 @@ describe('CurrenciesService', () => {
     it('should be no throw if repository returns', async () => {
       await expect(service.createCurrency(mockData)).resolves.not.toThrow()
     })
+
+    it('should be called repository with correct params', async () => {
+      await service.createCurrency(mockData)
+      expect(repository.createCurrency).toBeCalledWith(mockData)
+    })
   })
 })

@@ -51,7 +51,12 @@ describe('CurrenciesService', () => {
   describe('createCurrency()', () => {
     it('should be throw if repository throw', async () => {
       (repository.createCurrency as jest.Mock).mockRejectedValue(new InternalServerErrorException())
+      mockData.currency = 'INVALID'
       await expect(service.createCurrency(mockData)).rejects.toThrow(new InternalServerErrorException())
+    })
+
+    it('should be no throw if repository returns', async () => {
+      await expect(service.createCurrency(mockData)).resolves.not.toThrow()
     })
   })
 })

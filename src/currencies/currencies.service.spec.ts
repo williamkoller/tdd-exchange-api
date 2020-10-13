@@ -94,6 +94,16 @@ describe('CurrenciesService', () => {
         await service.updateCurrency(mockData)
         expect(repository.updateCurrency).toBeCalledWith(mockData)
       })
+
+      it('should be throw if value =< 0', async () => {
+        mockData.value = 0
+        await expect(service.createCurrency(mockData)).rejects.toThrow(new BadRequestException('The value must be greater zero.'))
+      })
+
+      it('should be return when repository return', async () => {
+      (repository.updateCurrency as jest.Mock).mockReturnValue(mockData)
+      expect(await service.updateCurrency(mockData)).toEqual(mockData)
+    })
     })
   })
 })

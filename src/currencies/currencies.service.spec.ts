@@ -85,6 +85,10 @@ describe('CurrenciesService', () => {
         mockData.currency = 'INVALID'
         await expect(service.updateCurrency(mockData)).rejects.toThrow(new InternalServerErrorException())
       })
+
+      it('should be no throw if repository returns', async () => {
+        await expect(service.updateCurrency(mockData)).resolves.not.toThrow()
+      })
     })
   })
 })

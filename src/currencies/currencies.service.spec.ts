@@ -111,8 +111,16 @@ describe('CurrenciesService', () => {
     describe('deleteCurrency()', () => {
       it('should be throw if repository throw', async () => {
         (repository.deleteCurrency as jest.Mock).mockRejectedValue(new InternalServerErrorException())
-        mockData.currency = 'INVALID'
-        await expect(service.deleteCurrency(mockData)).rejects.toThrow(new InternalServerErrorException())
+        await expect(service.deleteCurrency('INVALID')).rejects.toThrow(new InternalServerErrorException())
+      })
+
+      it('should be no throw if repository returns', async () => {
+        await expect(service.deleteCurrency('USD')).resolves.not.toThrow()
+      })
+
+      it('should be called repository with correct params', async () => {
+        await service.deleteCurrency('USD')
+        expect(repository.deleteCurrency).toBeCalledWith('USD')
       })
     })
   })

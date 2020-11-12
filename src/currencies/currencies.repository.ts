@@ -29,6 +29,7 @@ export class CurrenciesRepository extends Repository<Currencies> {
     }
 
     async updateCurrency({ currency, value }: CurrenciesInputType): Promise<Currencies> {
+        const result = await this.findOne({ currency });
         return new Currencies()
     }
     async deleteCurrency(currency: string): Promise<void> {

@@ -13,6 +13,8 @@ describe('CurrenciesRepository', () => {
 
     repository = module.get<CurrenciesRepository>(CurrenciesRepository)
     mockData = { currency: 'USD', value: 1 } as Currencies
+    repository.save = jest.fn()
+    repository.findOne = jest.fn()
 
   })
 
@@ -38,9 +40,6 @@ describe('CurrenciesRepository', () => {
     })
 
     describe('createCurrency', () => {
-      beforeEach(() => {
-        repository.save = jest.fn()
-      })
       it('should be called save with correct params', async () => {
         repository.save = jest.fn().mockReturnValue(mockData)
         await repository.createCurrency(mockData)
@@ -68,7 +67,7 @@ describe('CurrenciesRepository', () => {
 
     describe('updateCurrency', () => {
       it('should be called infoOne with correct params', async () => {
-        repository.findOne = jest.fn().mockReturnValue({});
+        repository.findOne = jest.fn().mockReturnValue(mockData);
         await repository.updateCurrency(mockData);
         expect(repository.findOne).toBeCalledWith({ currency: 'USD'});
       })
@@ -78,6 +77,13 @@ describe('CurrenciesRepository', () => {
         await expect(repository.updateCurrency(mockData)).rejects.toThrow(
           new NotFoundException(`The currency ${mockData.currency} not found`)
         )
+      })
+
+      it('should be called save with correct params', async () => {
+        repository.findOne = jest.fn().mockReturnValue(mockData)
+        repository.save = jest.fn().mockReturnValue(mockData)
+        await repository.updateCurrency(mockData)
+        expect(repository.save).toBeCalledWith(mockData)
       })
     })
   })

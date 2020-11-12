@@ -33,6 +33,9 @@ export class CurrenciesRepository extends Repository<Currencies> {
         if (!result) {
             throw new NotFoundException(`The currency ${currency} not found`)
         }
+
+        result.value = value
+        this.save(result)
         return new Currencies()
     }
     async deleteCurrency(currency: string): Promise<void> {

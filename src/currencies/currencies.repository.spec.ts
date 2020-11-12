@@ -85,6 +85,12 @@ describe('CurrenciesRepository', () => {
         await repository.updateCurrency(mockData)
         expect(repository.save).toBeCalledWith(mockData)
       })
+
+      it('should be throw when save throw', async () => {
+        repository.findOne = jest.fn().mockReturnValue(mockData);
+        repository.save = jest.fn().mockRejectedValue(new Error());
+        await expect(repository.updateCurrency(mockData)).rejects.toThrow();
+      })
     })
   })
 })

@@ -65,5 +65,13 @@ describe('CurrenciesRepository', () => {
         expect(await repository.createCurrency(mockData)).toEqual(mockData)
       })
     })
+
+    describe('updateCurrency', () => {
+      it('should be called infoOne with correct params', async () => {
+        repository.findOne = jest.fn().mockReturnValue({});
+        await repository.updateCurrency(mockData);
+        expect(repository.findOne).toBeCalledWith({ currency: 'USD'});
+      })
+    })
   })
 })

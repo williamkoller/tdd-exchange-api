@@ -1,8 +1,8 @@
 import { BadRequestException, InternalServerErrorException } from '@nestjs/common'
 import { Test, TestingModule } from '@nestjs/testing'
-import { CurrenciesRepository } from './currencies.repository'
+import { CurrenciesRepository } from '../repositories/currencies.repository'
 import { CurrenciesService } from './currencies.service'
-import { Currencies } from './currencies.entities'
+import { Currencies } from '../models/currencies.entities'
 
 describe('CurrenciesService', () => {
   let service: CurrenciesService

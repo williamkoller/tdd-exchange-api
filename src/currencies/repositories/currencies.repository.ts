@@ -1,7 +1,7 @@
 import { EntityRepository, Repository } from 'typeorm'
-import { Currencies } from './currencies.entities'
+import { Currencies } from '../models/currencies.entities'
 import { InternalServerErrorException, NotFoundException } from '@nestjs/common'
-import { CurrenciesInputType } from './types/currencies-input.type'
+import { CurrenciesInputType } from '../types/currencies-input.type'
 import { validateOrReject } from 'class-validator'
 
 @EntityRepository()
@@ -40,7 +40,7 @@ export class CurrenciesRepository extends Repository<Currencies> {
         } catch (error) {
             throw new InternalServerErrorException(error)
         }
-        return new Currencies()
+        return result
     }
     async deleteCurrency(currency: string): Promise<void> {
         return

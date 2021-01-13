@@ -1,7 +1,7 @@
 import { Test, TestingModule } from '@nestjs/testing'
 import { CurrenciesRepository } from './currencies.repository'
 import { InternalServerErrorException, NotFoundException } from '@nestjs/common'
-import { Currencies } from './currencies.entities'
+import { Currencies } from '../models/currencies.entities'
 
 describe('CurrenciesRepository', () => {
   let repository
@@ -90,6 +90,13 @@ describe('CurrenciesRepository', () => {
         repository.findOne = jest.fn().mockReturnValue(mockData);
         repository.save = jest.fn().mockRejectedValue(new Error());
         await expect(repository.updateCurrency(mockData)).rejects.toThrow();
+      })
+
+       it('should be returns updated data', async () => {
+        repository.findOne = jest.fn().mockReturnValue({ currency: 'USD', value: 1});
+        repository.save = jest.fn().mockReturnValue({});
+        const result = await repository.updateCurrency({ currency: 'USD', value: 2 });
+        expect(result).toEqual({ currency: 'USD', value: 2 });
       })
     })
   })

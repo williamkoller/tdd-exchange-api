@@ -1,4 +1,4 @@
-import { IsNotEmpty, IsNumber, Length } from 'class-validator';
+import { IsNotEmpty, Length } from 'class-validator';
 import {
   Column,
   CreateDateColumn,
@@ -22,7 +22,6 @@ export class Currencies {
 
   @Column()
   @IsNotEmpty()
-  @IsNumber()
   value: number;
 
   @CreateDateColumn({ type: 'timestamp' })

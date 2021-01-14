@@ -30,7 +30,7 @@ export class CurrenciesController {
     return await this.currenciesService.createCurrency(createCurrencyDto);
   }
 
-  @Delete(':/currency')
+  @Delete(':currency')
   async deleteCurrency(@Param('currency') currency: string): Promise<void> {
     return await this.currenciesService.deleteCurrency(currency);
   }

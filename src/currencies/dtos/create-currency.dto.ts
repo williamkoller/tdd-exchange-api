@@ -1,12 +1,11 @@
-import { IsNotEmpty, IsNumber, IsString, Length } from 'class-validator';
+import { IsNotEmpty, IsNumberString, Length } from 'class-validator';
 
 export class CreateCurrencyDto {
-  @IsString()
   @IsNotEmpty()
   @Length(3, 3)
   currency: string;
 
-  @IsNumber()
   @IsNotEmpty()
+  @IsNumberString()
   value: number;
 }

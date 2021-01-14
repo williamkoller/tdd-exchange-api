@@ -7,12 +7,12 @@ import {
 import { CreateCurrencyDto } from '../dtos/create-currency.dto';
 import { validateOrReject } from 'class-validator';
 
-@EntityRepository()
+@EntityRepository(Currencies)
 export class CurrenciesRepository extends Repository<Currencies> {
   async getCurrency(currency: string): Promise<Currencies> {
     const result = await this.findOne({ currency });
     if (!result) {
-      throw new InternalServerErrorException();
+      throw new NotFoundException(`The currency ${currency} not found`);
     }
     return result;
   }
@@ -21,8 +21,8 @@ export class CurrenciesRepository extends Repository<Currencies> {
     createCurrencyDto: CreateCurrencyDto
   ): Promise<Currencies> {
     const createCurrency = new Currencies();
-    Object.assign(createCurrency, createCurrencyDto);
-
+    createCurrency.currency = createCurrencyDto.currency;
+    createCurrency.value = createCurrencyDto.value;
     try {
       await validateOrReject(createCurrency);
       await this.save(createCurrency);

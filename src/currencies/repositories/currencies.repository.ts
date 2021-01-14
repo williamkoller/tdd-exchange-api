@@ -4,7 +4,7 @@ import {
   InternalServerErrorException,
   NotFoundException,
 } from '@nestjs/common';
-import { CurrenciesInputType } from '../types/currencies-input.type';
+import { CreateCurrencyDto } from '../dtos/create-currency.dto';
 import { validateOrReject } from 'class-validator';
 
 @EntityRepository()
@@ -18,10 +18,10 @@ export class CurrenciesRepository extends Repository<Currencies> {
   }
 
   async createCurrency(
-    currenciesInputType: CurrenciesInputType
+    createCurrencyDto: CreateCurrencyDto
   ): Promise<Currencies> {
     const createCurrency = new Currencies();
-    Object.assign(createCurrency, currenciesInputType);
+    Object.assign(createCurrency, createCurrencyDto);
 
     try {
       await validateOrReject(createCurrency);
@@ -35,7 +35,7 @@ export class CurrenciesRepository extends Repository<Currencies> {
   async updateCurrency({
     currency,
     value,
-  }: CurrenciesInputType): Promise<Currencies> {
+  }: CreateCurrencyDto): Promise<Currencies> {
     const result = await this.findOne({ currency });
     if (!result) {
       throw new NotFoundException(`The currency ${currency} not found`);

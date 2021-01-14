@@ -4,6 +4,7 @@ import {
   Delete,
   Get,
   Param,
+  Patch,
   Post,
   UsePipes,
   ValidationPipe,
@@ -32,5 +33,13 @@ export class CurrenciesController {
   @Delete(':/currency')
   async deleteCurrency(@Param('currency') currency: string): Promise<void> {
     return await this.currenciesService.deleteCurrency(currency);
+  }
+
+  @Patch('/:currency/value')
+  async updateCurrency(
+    @Param('currency') currency: string,
+    @Body() value: number
+  ): Promise<Currencies> {
+    return await this.currenciesService.updateCurrency({ currency, value });
   }
 }

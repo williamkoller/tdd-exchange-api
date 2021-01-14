@@ -1,5 +1,5 @@
 import { Module } from '@nestjs/common';
-import { CurrenciesService } from './currencies.service';
+import { CurrenciesService } from './services/currencies.service';
 
 @Module({
   providers: [CurrenciesService]

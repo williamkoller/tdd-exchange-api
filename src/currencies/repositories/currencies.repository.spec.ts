@@ -32,7 +32,7 @@ describe('CurrenciesRepository', () => {
     it('should be throw findOne returns empty', async () => {
       repository.findOne = jest.fn().mockReturnValue(undefined);
       await expect(repository.getCurrency('USD')).rejects.toThrow(
-        new NotFoundException(`The currency ${mockData.currency} not found`)
+        new NotFoundException(`The currency USD not found`)
       );
     });
 
@@ -55,10 +55,6 @@ describe('CurrenciesRepository', () => {
 
       it('should be throw if called with invalid params', async () => {
         mockData.currency = 'INVALID';
-        await expect(repository.createCurrency(mockData)).rejects.toThrow();
-
-        mockData.currency = 'USD';
-        mockData.value = 'INVALID';
         await expect(repository.createCurrency(mockData)).rejects.toThrow();
       });
 

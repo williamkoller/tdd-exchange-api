@@ -31,8 +31,7 @@ $ npm run test
 $ npm run test:coveralls
 ```
 
-<img src="https://i.ibb.co/Gnngvpf/Screenshot-from-2021-01-14-02-41-25.png"/>
-<br/>
+<a href="https://ibb.co/Gnngvpf"><img src="https://i.ibb.co/KbbCjhc/Screenshot-from-2021-01-14-02-41-25.png" alt="Screenshot-from-2021-01-14-02-41-25" border="0"></a><br /><a target='_blank' href='https://pt-br.imgbb.com/'></a><br />
 
 ## Endpoints
 

@@ -31,6 +31,9 @@ $ npm run test
 $ npm run test:coveralls
 ```
 
+<img src="https://i.ibb.co/Gnngvpf/Screenshot-from-2021-01-14-02-41-25.png"/>
+<br/>
+
 ## Endpoints
 
 ### Currency exchange

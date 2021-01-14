@@ -5,16 +5,66 @@
 
 # **TDD Exchange API**
 
-Rest API made in Nestjs, using TDD (Test Driven Development).
+Rest API made in Nestjs, using TDD (Test Driven Development), TypeORM, TypeScript and MongoDB.
 
 ### Requisits to run this project
 
-- Docker
-- Docker-compose
+- docker
+- docker-compose
+- npm 
 
-### To run this project, follow the below steps
+## Running the app
 
-##### Build Project
-   - `npm i`
-   - `docker-compose up --build`
+```bash
+$ npm i 
+$ docker-compose up --build
+# listening in http://localhost:3000
+```
 
+## Test
+
+```bash
+# unit tests
+$ npm run test
+
+# test coverage
+$ npm run test:coveralls
+```
+
+
+## Endpoints
+
+### Currency exchange
+
+```bash
+GET
+http://localhost:3003/exchange/?from=USD&to=BRL&amount=1
+```
+
+
+### Create Currency
+
+```bash
+POST
+http://localhost:3003/currencies/
+Put values in body:
+currency=BRL
+value=0.2
+```
+
+
+### Update Currency Value
+
+```bash
+PATCH
+http://localhost:3003/currencies/BRL/value
+Put value in body:
+value=0.22
+```
+
+### Delete Currency
+
+```bash
+DELETE
+http://localhost:3003/currencies/BRL
+```

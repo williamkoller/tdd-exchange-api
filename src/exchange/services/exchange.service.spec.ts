@@ -2,7 +2,7 @@ import { BadRequestException } from '@nestjs/common';
 import { Test, TestingModule } from '@nestjs/testing';
 import { CurrenciesService } from '../../currencies/services/currencies.service';
 import { ExchangeService } from './exchange.service';
-import { ExchangeInputType } from '../types/exchange-input.type';
+import { CreateExchangeDto } from '../dtos/create-exchange.dto.ts';
 
 describe('ExchangeService', () => {
   let service: ExchangeService;
@@ -22,7 +22,7 @@ describe('ExchangeService', () => {
 
     service = module.get<ExchangeService>(ExchangeService);
     currenciesService = module.get<CurrenciesService>(CurrenciesService);
-    mockData = { from: 'USD', to: 'BRL', amount: 1 } as ExchangeInputType;
+    mockData = { from: 'USD', to: 'BRL', amount: 1 } as CreateExchangeDto;
   });
 
   it('should be defined', () => {
